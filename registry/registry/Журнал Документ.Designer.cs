@@ -54,14 +54,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(33, 16);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(719, 425);
+            this.dataGridView1.Size = new System.Drawing.Size(1349, 425);
             this.dataGridView1.TabIndex = 1;
             // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Gray;
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(295, 465);
+            this.button2.Location = new System.Drawing.Point(608, 465);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(207, 41);
@@ -73,7 +73,7 @@
             // 
             this.button3.BackColor = System.Drawing.Color.Gray;
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(545, 465);
+            this.button3.Location = new System.Drawing.Point(1175, 465);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(207, 41);
@@ -86,7 +86,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(784, 530);
+            this.ClientSize = new System.Drawing.Size(1413, 562);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView1);
@@ -95,6 +95,8 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Журнал_Документ";
             this.Text = "Реестр документов";
+            this.Activated += new System.EventHandler(this.Журнал_Документ_Activated);
+            this.Load += new System.EventHandler(this.Журнал_Документ_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

@@ -43,7 +43,7 @@
             this.label1.Location = new System.Drawing.Point(13, 24);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 16);
+            this.label1.Size = new System.Drawing.Size(107, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Код помещения";
             // 
@@ -61,7 +61,7 @@
             this.label2.Location = new System.Drawing.Point(246, 24);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 16);
+            this.label2.Size = new System.Drawing.Size(85, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "Количество";
             // 
@@ -83,6 +83,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Сохранить";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
@@ -108,6 +109,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Добавить_Помещение";
             this.Text = "Помещение, входящее в документ";
+            this.Load += new System.EventHandler(this.Добавить_Помещение_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

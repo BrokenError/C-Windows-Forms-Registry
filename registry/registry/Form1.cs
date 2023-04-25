@@ -18,7 +18,7 @@ namespace registry
             InitializeComponent();
         }
 
-        public static NpgsqlConnection connection = new NpgsqlConnection("Server=127.0.0.1; User Id=postgres; Password=postgres; Database=registry;");
+        public static NpgsqlConnection connection = new NpgsqlConnection("Server=127.0.0.1; User Id=postgres; Password=12345; Database=registry;");
 
         public static DataSet ds = new DataSet();
 
