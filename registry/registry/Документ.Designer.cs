@@ -63,7 +63,7 @@
             this.label1.Location = new System.Drawing.Point(16, 19);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 16);
+            this.label1.Size = new System.Drawing.Size(34, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Код:";
             // 
@@ -90,7 +90,7 @@
             this.label2.Location = new System.Drawing.Point(16, 60);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 16);
+            this.label2.Size = new System.Drawing.Size(76, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "Название:";
             // 
@@ -100,7 +100,7 @@
             this.label3.Location = new System.Drawing.Point(16, 99);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 16);
+            this.label3.Size = new System.Drawing.Size(42, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Дата:";
             // 
@@ -118,7 +118,7 @@
             this.label4.Location = new System.Drawing.Point(16, 141);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 16);
+            this.label4.Size = new System.Drawing.Size(73, 16);
             this.label4.TabIndex = 6;
             this.label4.Text = "Действие:";
             // 
@@ -128,7 +128,7 @@
             this.label5.Location = new System.Drawing.Point(13, 192);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(107, 16);
+            this.label5.Size = new System.Drawing.Size(106, 16);
             this.label5.TabIndex = 8;
             this.label5.Text = "Дата действия:";
             // 
@@ -138,7 +138,7 @@
             this.label6.Location = new System.Drawing.Point(13, 228);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(148, 16);
+            this.label6.Size = new System.Drawing.Size(147, 16);
             this.label6.TabIndex = 10;
             this.label6.Text = "Код подразделения1:";
             // 
@@ -148,7 +148,7 @@
             this.label7.Location = new System.Drawing.Point(13, 269);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(148, 16);
+            this.label7.Size = new System.Drawing.Size(147, 16);
             this.label7.TabIndex = 12;
             this.label7.Text = "Код подразделения2:";
             // 
@@ -224,7 +224,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(149, 16);
             this.label9.TabIndex = 23;
-            this.label9.Text = "Входящие документы:";
+            this.label9.Text = "Входящие помещения:";
             // 
             // dataGridView1
             // 
@@ -233,6 +233,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(484, 148);
             this.dataGridView1.TabIndex = 24;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // button3
             // 
@@ -254,6 +255,7 @@
             this.button4.TabIndex = 26;
             this.button4.Text = "Редактировать помещение";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -264,6 +266,7 @@
             this.button5.TabIndex = 27;
             this.button5.Text = "Удалить помещение";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button2
             // 

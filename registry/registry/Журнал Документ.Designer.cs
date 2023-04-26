@@ -68,6 +68,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Редактировать документ";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -96,6 +97,7 @@
             this.Name = "Журнал_Документ";
             this.Text = "Реестр документов";
             this.Activated += new System.EventHandler(this.Журнал_Документ_Activated);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Журнал_Документ_FormClosed);
             this.Load += new System.EventHandler(this.Журнал_Документ_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
