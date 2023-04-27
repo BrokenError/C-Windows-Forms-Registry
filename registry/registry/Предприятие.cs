@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace registry
 {
@@ -85,6 +86,13 @@ namespace registry
 
         private void button5_Click(object sender, EventArgs e)
         {
+            if (textBox2.Text == "" || textBox3.Text == "")
+            {
+                DialogResult result = MessageBox.Show("Данная запись будет удалена, потому что поля пустые\nДалее?", "Предупреждение", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes) { return; }
+            }
+
+
             string sql;
             if (n == Form1.ds.Tables["Предприятие"].Rows.Count)
             {

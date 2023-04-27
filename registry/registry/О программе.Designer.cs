@@ -73,7 +73,7 @@
             this.logoPictureBox.Name = "logoPictureBox";
             this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 6);
             this.logoPictureBox.Size = new System.Drawing.Size(193, 259);
-            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.logoPictureBox.TabIndex = 12;
             this.logoPictureBox.TabStop = false;
             // 
@@ -137,9 +137,7 @@
             this.textBoxDescription.Size = new System.Drawing.Size(397, 126);
             this.textBoxDescription.TabIndex = 23;
             this.textBoxDescription.TabStop = false;
-            this.textBoxDescription.Text = "Данный продукт предназначени для управления реестром помещений. \r\nОсновые функции" +
-    ": просмотр и поиск помещений, подразделений, предприятий,\r\nдобавление, редактиро" +
-    "вание, удаление документов.";
+            this.textBoxDescription.Text = resources.GetString("textBoxDescription.Text");
             this.textBoxDescription.TextChanged += new System.EventHandler(this.textBoxDescription_TextChanged);
             // 
             // okButton

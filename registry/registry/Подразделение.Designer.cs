@@ -156,7 +156,7 @@
             this.label3.Location = new System.Drawing.Point(20, 103);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(132, 16);
+            this.label3.Size = new System.Drawing.Size(131, 16);
             this.label3.TabIndex = 15;
             this.label3.Text = "Краткое название:";
             // 
@@ -166,7 +166,7 @@
             this.label2.Location = new System.Drawing.Point(20, 58);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 16);
+            this.label2.Size = new System.Drawing.Size(127, 16);
             this.label2.TabIndex = 14;
             this.label2.Text = "Полное название:";
             // 
@@ -176,7 +176,7 @@
             this.label1.Location = new System.Drawing.Point(20, 20);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 16);
+            this.label1.Size = new System.Drawing.Size(34, 16);
             this.label1.TabIndex = 13;
             this.label1.Text = "Код:";
             // 
@@ -186,7 +186,7 @@
             this.label4.Location = new System.Drawing.Point(20, 141);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(143, 16);
+            this.label4.Size = new System.Drawing.Size(142, 16);
             this.label4.TabIndex = 25;
             this.label4.Text = "Родительный падеж:";
             // 
@@ -196,7 +196,7 @@
             this.label5.Location = new System.Drawing.Point(20, 176);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(127, 16);
+            this.label5.Size = new System.Drawing.Size(126, 16);
             this.label5.TabIndex = 26;
             this.label5.Text = "Дательный падеж:";
             // 
@@ -206,7 +206,7 @@
             this.label6.Location = new System.Drawing.Point(20, 213);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 16);
+            this.label6.Size = new System.Drawing.Size(98, 16);
             this.label6.TabIndex = 27;
             this.label6.Text = "Предприятие:";
             // 
@@ -216,7 +216,7 @@
             this.label7.Location = new System.Drawing.Point(20, 247);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(173, 16);
+            this.label7.Size = new System.Drawing.Size(172, 16);
             this.label7.TabIndex = 28;
             this.label7.Text = "Главное подразделение:";
             // 
@@ -242,6 +242,7 @@
             this.comboBox1.Size = new System.Drawing.Size(317, 24);
             this.comboBox1.TabIndex = 31;
             this.toolTip1.SetToolTip(this.comboBox1, "Выберите из списка");
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // comboBox2
             // 
@@ -251,6 +252,7 @@
             this.comboBox2.Size = new System.Drawing.Size(317, 24);
             this.comboBox2.TabIndex = 32;
             this.toolTip1.SetToolTip(this.comboBox2, "Выберите из списка");
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // statusStrip1
             // 

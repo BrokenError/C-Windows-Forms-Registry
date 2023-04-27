@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.3
--- Dumped by pg_dump version 14.3
+-- Dumped from database version 15.2
+-- Dumped by pg_dump version 15.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -61,12 +61,12 @@ ALTER SEQUENCE public.company_comp_id_seq OWNED BY public.company.comp_id;
 
 CREATE TABLE public.document (
     doc_id integer NOT NULL,
-    doc_name character varying(60) NOT NULL,
-    doc_date date NOT NULL,
-    doc_action character varying(50) NOT NULL,
-    doc_date_action date NOT NULL,
-    subd_id1 integer NOT NULL,
-    subd_id2 integer NOT NULL
+    doc_name character varying(60),
+    doc_date date,
+    doc_action character varying(50),
+    doc_date_action date,
+    subd_id1 integer,
+    subd_id2 integer
 );
 
 
@@ -112,8 +112,8 @@ ALTER TABLE public.fixed_placement OWNER TO postgres;
 
 CREATE TABLE public.placement (
     place_id integer NOT NULL,
-    place_type text NOT NULL,
-    place_area numeric(7,2) NOT NULL
+    place_type text,
+    place_area numeric(7,2)
 );
 
 
@@ -230,6 +230,7 @@ COPY public.document (doc_id, doc_name, doc_date, doc_action, doc_date_action, s
 2	приказ	2023-04-17	передать	2023-04-17	2	1
 3	приказ	2023-01-22	закрепить	2023-01-23	1	2
 4	приказ	2023-01-22	закрепить	2023-01-23	1	3
+6	jhj	2023-04-27	hjjjjj	2023-04-27	3	6
 \.
 
 
@@ -242,6 +243,8 @@ COPY public.fixed_placement (doc_id, place_id) FROM stdin;
 2	5
 3	1
 4	2
+6	3
+6	2
 \.
 
 
@@ -263,12 +266,12 @@ COPY public.placement (place_id, place_type, place_area) FROM stdin;
 --
 
 COPY public.subdivision (subd_id, subd_full_name, subd_short_name, genitive, dative, comp_id, subd_main) FROM stdin;
-1	Отдел экономии	ОЭ	Отдела экономии	Отделу экономии	1	1
 2	Отдел организации труда и зарплаты	ОТиЗ	Отдела организации труда и зарплаты	Отделу организации труда и зарплаты	1	1
 3	Отдел Главного технолога	ОГТ	Отдела Главного технолога	Отделу Главного технолога	1	1
-4	Отдел экономии	ОЭ	Отдела экономии	Отделу экономии	2	4
 5	Отдел компьютерных технологий	ОКТ	Отдела компьютерных технологий	Отделу компьютерных технологий	2	4
-6	Отдел экономии	ОЭ	Отдела экономии	Отделу экономии	3	6
+6	Производственное	ПП	Производственному	Производственному	3	6
+4	Исследовательско-техническое	ИТ	Исследовательско-технического	Исследовательско-техническому	2	4
+1	Финансово-учетное	ФУ	Финансово-учетного	Финансово-учетному	1	1
 \.
 
 
@@ -345,7 +348,7 @@ ALTER TABLE ONLY public.subdivision
 --
 
 ALTER TABLE ONLY public.document
-    ADD CONSTRAINT document_subd_id1_fkey FOREIGN KEY (subd_id1) REFERENCES public.subdivision(subd_id);
+    ADD CONSTRAINT document_subd_id1_fkey FOREIGN KEY (subd_id1) REFERENCES public.subdivision(subd_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -353,7 +356,7 @@ ALTER TABLE ONLY public.document
 --
 
 ALTER TABLE ONLY public.document
-    ADD CONSTRAINT document_subd_id2_fkey FOREIGN KEY (subd_id2) REFERENCES public.subdivision(subd_id);
+    ADD CONSTRAINT document_subd_id2_fkey FOREIGN KEY (subd_id2) REFERENCES public.subdivision(subd_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -361,7 +364,7 @@ ALTER TABLE ONLY public.document
 --
 
 ALTER TABLE ONLY public.fixed_placement
-    ADD CONSTRAINT fixed_placement_doc_id_fkey FOREIGN KEY (doc_id) REFERENCES public.document(doc_id);
+    ADD CONSTRAINT fixed_placement_doc_id_fkey FOREIGN KEY (doc_id) REFERENCES public.document(doc_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -369,7 +372,7 @@ ALTER TABLE ONLY public.fixed_placement
 --
 
 ALTER TABLE ONLY public.fixed_placement
-    ADD CONSTRAINT fixed_placement_place_id_fkey FOREIGN KEY (place_id) REFERENCES public.placement(place_id);
+    ADD CONSTRAINT fixed_placement_place_id_fkey FOREIGN KEY (place_id) REFERENCES public.placement(place_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -377,7 +380,7 @@ ALTER TABLE ONLY public.fixed_placement
 --
 
 ALTER TABLE ONLY public.subdivision
-    ADD CONSTRAINT subdivision_comp_id_fkey FOREIGN KEY (comp_id) REFERENCES public.company(comp_id);
+    ADD CONSTRAINT subdivision_comp_id_fkey FOREIGN KEY (comp_id) REFERENCES public.company(comp_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -385,7 +388,7 @@ ALTER TABLE ONLY public.subdivision
 --
 
 ALTER TABLE ONLY public.subdivision
-    ADD CONSTRAINT subdivision_subd_main_fkey FOREIGN KEY (subd_main) REFERENCES public.subdivision(subd_id);
+    ADD CONSTRAINT subdivision_subd_main_fkey FOREIGN KEY (subd_main) REFERENCES public.subdivision(subd_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

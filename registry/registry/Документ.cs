@@ -53,15 +53,15 @@ namespace registry
 
             sql = "delete from document where doc_id=" + textBox1.Text;
             Form1.Modification_Execute(sql);
-            for (int j = 0; j < Form1.ds.Tables["Добавление помещения"].Rows.Count; j++)
+
+            sql = "insert into document values (" + textBox1.Text + ", '" + textBox2.Text + "', '" + dateTimePicker1.Value + "', '" + textBox4.Text
+             + "', '" + dateTimePicker2.Value + "', " + kod1 + ", " + kod2 + ");";
+            Console.WriteLine(sql);
+            Form1.Modification_Execute(sql);
+
+            for (int j = 0; j < Form1.ds.Tables["Помещения"].Rows.Count; j++)
             {
-                for (int i = 0; i < Form1.ds.Tables["Помещения"].Rows.Count; i++)
-                {
-                    if (Convert.ToInt32(Form1.ds.Tables["Помещения"].Rows[i]["Код помещения"]) == Convert.ToInt32(Form1.ds.Tables["Добавление помещения"].Rows[j]["Код"]))
-                        Документ.n = i;
-                }
-                sql = "insert into document values (" + textBox1.Text + ", '" + textBox2.Text + "', '" + dateTimePicker1.Value + "', '" + textBox4.Text
-                    + "', '" + dateTimePicker2.Value + "', " + kod1 + ", " + kod2 + Form1.ds.Tables["Добавление помещения"].Rows[j]["Тип помещения"] + Form1.ds.Tables["Добавление помещения"].Rows[j]["Площадь помещения"] +");";
+                sql = "insert into fixed_placement values (" + textBox1.Text + ", " + Form1.ds.Tables["Помещения"].Rows[j]["Код помещения"] + ");";
                 Console.WriteLine(sql);
                 Form1.Modification_Execute(sql);
             }
@@ -76,8 +76,9 @@ namespace registry
                 textBox2.Text = Form1.ds.Tables["Журнал документов"].Rows[Журнал_Документ.n]["Название"].ToString();
                 if (Form1.ds.Tables["Журнал документов"].Rows[Журнал_Документ.n]["Дата заключения"] != DBNull.Value)
                     dateTimePicker1.Value = Convert.ToDateTime(Form1.ds.Tables["Журнал документов"].Rows[Журнал_Документ.n]["Дата заключения"].ToString());
-                comboBox1.Text = Form1.ds.Tables["Журнал документов"].Rows[Журнал_Документ.n]["Первое подразделение"].ToString();
-                comboBox2.Text = Form1.ds.Tables["Журнал документов"].Rows[Журнал_Документ.n]["Второе подразделение"].ToString();
+                textBox4.Text = Form1.ds.Tables["Журнал документов"].Rows[Журнал_Документ.n]["Действие"].ToString();
+                comboBox1.Text = Form1.ds.Tables["Журнал документов"].Rows[Журнал_Документ.n]["Арендодатель"].ToString();
+                comboBox2.Text = Form1.ds.Tables["Журнал документов"].Rows[Журнал_Документ.n]["Арендатор"].ToString();
             }
             catch (IndexOutOfRangeException)
             {
@@ -97,19 +98,19 @@ namespace registry
 
         private void Документ_Activated(object sender, EventArgs e)
         {
-            string sql = "select subd_id as \"Код\", subd_full_name as \"Название подразделения\" from subdivision order by subd_id";
+            string sql = "select subd_id as \"Код\", subd_full_name as \"Название подразделения\", genitive as \"Арендодатель\", dative as \"Арендатор\" from subdivision order by subd_id";
             Form1.Table_Fill("Подразделения выбор", sql);
 
             comboBox1.Items.Clear();
             for (int i = 0; i < Form1.ds.Tables["Подразделения выбор"].Rows.Count; i++)
             {
-                comboBox1.Items.Add(Form1.ds.Tables["Подразделения выбор"].Rows[i]["Название подразделения"]);
+                comboBox1.Items.Add(Form1.ds.Tables["Подразделения выбор"].Rows[i]["Арендодатель"]);
             }
 
             comboBox2.Items.Clear();
             for (int i = 0; i < Form1.ds.Tables["Подразделения выбор"].Rows.Count; i++)
             {
-                comboBox2.Items.Add(Form1.ds.Tables["Подразделения выбор"].Rows[i]["Название подразделения"]);
+                comboBox2.Items.Add(Form1.ds.Tables["Подразделения выбор"].Rows[i]["Арендатор"]);
             }
 
             dataGridView1.AutoResizeColumns();
@@ -149,6 +150,8 @@ namespace registry
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result = MessageBox.Show(message, caption, buttons);
             if (result == DialogResult.No) { return; }
+            string sql = "delete from document where doc_id = "+n;
+            Form1.Modification_Execute(sql);
             Form1.ds.Tables["Помещения"].Rows.RemoveAt(n);
             dataGridView1.AutoResizeColumns();
             dataGridView1.CurrentCell = null;

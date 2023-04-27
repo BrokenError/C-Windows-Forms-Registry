@@ -26,6 +26,8 @@ namespace registry
             string company = "Select comp_id as \"Код компании\",  comp_name as \"Название компании\" from company order by comp_id";
             Form1.Table_Fill("Предприятия", company);
 
+
+
             HashSet<string> set1 = new HashSet<string>();
 
             for (int o = 0; o < Form1.ds.Tables["Подразделение"].Rows.Count; o++)
@@ -33,16 +35,15 @@ namespace registry
                 set1.Add(Convert.ToString(Form1.ds.Tables["Подразделение"].Rows[o]["Код главного подразделения"]));
             }
 
-            foreach (string str in set1)
-            {
-                for (int i = 0; i < Form1.ds.Tables["Подразделение"].Rows.Count; i++)
+/*            foreach (string str in set1)
+            {*/
+                for (int i = 0; i < Form1.ds.Tables["Доступные главные подразделения"].Rows.Count; i++)
                 {
-                    if (str == Convert.ToString(Form1.ds.Tables["Подразделение"].Rows[i]["Код"]))
-                    {
-                        comboBox2.Items.Add(Form1.ds.Tables["Подразделение"].Rows[i]["Полное название"]);
-                    }
+/*                    if (str == Convert.ToString(Form1.ds.Tables["Доступные главные подразделения"].Rows[i]["Код"]))
+                    {*/
+                        comboBox2.Items.Add(Form1.ds.Tables["Доступные главные подразделения"].Rows[i]["Полное название"]);
                 }
-            }
+            /*}*/
             comboBox2.Sorted = true;
         }
 
@@ -81,6 +82,33 @@ namespace registry
             textBox1.Focus();
         }
 
+        private void FieldsComboBox2()
+        {
+            for (int i = 0; i < Form1.ds.Tables["Предприятия"].Rows.Count; i++)
+            {
+                if (Form1.ds.Tables["Предприятия"].Rows[i]["Название компании"].ToString() == comboBox1.Text.ToString())
+                {
+                    kod = Convert.ToInt32(Form1.ds.Tables["Предприятия"].Rows[i]["Код компании"]);
+                    break;
+                }
+                else
+                {
+                    kod = 0;
+                }
+            }
+
+            string ps = "select subd_id as \"Код\", subd_full_name as \"Полное название\", subd_main as \"Код главного подразделения\" from subdivision join company on subdivision.comp_id = company.comp_id where company.comp_id=" + kod;
+            Form1.Table_Fill("Доступные главные подразделения", ps);
+            comboBox2.Items.Clear();
+            Console.WriteLine("yep");
+            for (int i = 0; i < Form1.ds.Tables["Доступные главные подразделения"].Rows.Count; i++)
+            {
+                comboBox2.Items.Add(Form1.ds.Tables["Доступные главные подразделения"].Rows[i]["Полное название"]);
+            }
+            comboBox2.Sorted = true;
+        }
+
+
         private void FieldsForm_Fill()
         {
             textBox1.Text = Form1.ds.Tables["Подразделение"].Rows[n]["Код"].ToString();
@@ -95,6 +123,8 @@ namespace registry
                     comboBox1.Text = Form1.ds.Tables["Предприятия"].Rows[i]["Название компании"].ToString();
                 }
             }
+
+            FieldsComboBox2();
 
             for (int i = 0; i < Form1.ds.Tables["Подразделение"].Rows.Count; i++)
             {
@@ -131,6 +161,7 @@ namespace registry
             else
             {
                 FieldsForm_Clear();
+                FieldsComboBox2();
             }
         }
 
@@ -138,15 +169,17 @@ namespace registry
         {
             n = Form1.ds.Tables["Подразделение"].Rows.Count;
             FieldsForm_Clear();
+            FieldsComboBox2();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Form1.ds.Tables["Предприятия"].Rows.Count; i++)
+            if (textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || comboBox1.Text == "" || comboBox2.Text == "")
             {
-                if (Form1.ds.Tables["Предприятия"].Rows[i]["Название компании"].ToString() == comboBox1.Text)
-                    kod = Convert.ToInt32(Form1.ds.Tables["Предприятия"].Rows[i]["Код компании"]);
+                DialogResult result = MessageBox.Show("Данная запись будет удалена, потому что поля пустые\nДалее?", "Предупреждение", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes) { return; }
             }
+
 
             for (int i = 0; i < Form1.ds.Tables["Подразделение"].Rows.Count; i++)
             {
@@ -168,7 +201,7 @@ namespace registry
             }
             else
             {
-                sql = "Update subdivision set subd_full_name='" + textBox2.Text + "', subd_short_name='" + textBox3.Text + "', genitive='"+ textBox4.Text + "', dative='"+ textBox5.Text + "', comp_id='" + comboBox1.Text + "', subd_main='" + comboBox2.Text + "' where subd_id=" + textBox1.Text;
+                sql = "Update subdivision set subd_full_name='" + textBox2.Text + "', subd_short_name='" + textBox3.Text + "', genitive='"+ textBox4.Text + "', dative='"+ textBox5.Text + "', comp_id='" + kod + "', subd_main='" + kod2 + "' where subd_id=" + textBox1.Text;
                 if (!Form1.Modification_Execute(sql))
                     return;
                 Form1.ds.Tables["Подразделение"].Rows[n].ItemArray = new object[] { textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, kod, kod2};
@@ -204,6 +237,16 @@ namespace registry
             {
                 FieldsForm_Clear();
             }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FieldsComboBox2();
         }
     }
 }

@@ -120,12 +120,6 @@
     <Compile Include="Журнал Документ.Designer.cs">
       <DependentUpon>Журнал Документ.cs</DependentUpon>
     </Compile>
-    <Compile Include="Закрепляемое помещение.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Закрепляемое помещение.Designer.cs">
-      <DependentUpon>Закрепляемое помещение.cs</DependentUpon>
-    </Compile>
     <Compile Include="Запрос Подразделение.cs">
       <SubType>Form</SubType>
     </Compile>
