@@ -35,20 +35,21 @@ namespace registry
                 set1.Add(Convert.ToString(Form1.ds.Tables["Подразделение"].Rows[o]["Код главного подразделения"]));
             }
 
-/*            foreach (string str in set1)
-            {*/
-                for (int i = 0; i < Form1.ds.Tables["Доступные главные подразделения"].Rows.Count; i++)
-                {
-/*                    if (str == Convert.ToString(Form1.ds.Tables["Доступные главные подразделения"].Rows[i]["Код"]))
-                    {*/
-                        comboBox2.Items.Add(Form1.ds.Tables["Доступные главные подразделения"].Rows[i]["Полное название"]);
-                }
-            /*}*/
+            for (int i = 0; i < Form1.ds.Tables["Доступные главные подразделения"].Rows.Count; i++)
+            {
+                    comboBox2.Items.Add(Form1.ds.Tables["Доступные главные подразделения"].Rows[i]["Полное название"]);
+            }
             comboBox2.Sorted = true;
         }
 
         private void Подразделение_Load(object sender, EventArgs e)
         {
+            if (Авторизация.polzov != "Администратор")
+            {
+                button5.Enabled = false;
+                button6.Enabled = false;
+            }
+
 
             string sql = "SELECT subd_id as \"Код\", subd_full_name as \"Полное название\", subd_short_name as \"Краткое название\", genitive as \"Родительный падеж\", dative as \"Дательный падеж\", comp_id as \"Код предприятия\", subd_main as \"Код главного подразделения\"" + " from subdivision order by subd_id";
             Form1.Table_Fill("Подразделение", sql);

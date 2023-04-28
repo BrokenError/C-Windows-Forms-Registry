@@ -22,6 +22,13 @@ namespace registry
 
         private void Помещение_Load(object sender, EventArgs e)
         {
+            if (Авторизация.polzov != "Администратор")
+            {
+                button5.Enabled = false;
+                button6.Enabled = false;
+            }
+
+
             string sql = "SELECT place_id as \"Код\", place_type as \"Тип\", place_area as \"Площадь\"" + " from placement order by place_id";
             Form1.Table_Fill("Помещение", sql);
 

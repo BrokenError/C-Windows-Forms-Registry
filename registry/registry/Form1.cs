@@ -17,7 +17,7 @@ namespace registry
         {
             InitializeComponent();
         }
-                                                                                                                /*postgres*/
+                                                                                                                /*postgres*/ /*12345*/
         public static NpgsqlConnection connection = new NpgsqlConnection("Server=127.0.0.1; User Id=postgres; Password=12345; Database=registry;");
 
         public static DataSet ds = new DataSet();
@@ -98,10 +98,6 @@ namespace registry
 
         private void помещениеToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Запрос_Помещение запрос_Помещение = new Запрос_Помещение();
-            this.Hide();
-            запрос_Помещение.ShowDialog();
-            this.Show();
         }
 
         private void документToolStripMenuItem_Click(object sender, EventArgs e)
@@ -130,7 +126,11 @@ namespace registry
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            if (Авторизация.polzov != "Администратор")
+            {
+                журналыToolStripMenuItem.Enabled = false;
+                настройкаПаролейToolStripMenuItem.Enabled = false;
+            }
         }
 
         private void предприятиеToolStripMenuItem1_Click_1(object sender, EventArgs e)

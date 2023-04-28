@@ -21,6 +21,13 @@ namespace registry
 
         private void Предприятие_Load(object sender, EventArgs e)
         {
+            if (Авторизация.polzov != "Администратор")
+            {
+                button5.Enabled = false;
+                button6.Enabled = false;
+            }
+
+
             string sql = "SELECT comp_id as \"Код\", comp_name as \"Название\", comp_short_name as \"Краткое название\"" + " from company order by comp_id";
             Form1.Table_Fill("Предприятие",sql);
 

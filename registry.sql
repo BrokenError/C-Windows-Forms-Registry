@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 15.2
--- Dumped by pg_dump version 15.2
+-- Dumped from database version 14.3
+-- Dumped by pg_dump version 14.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -181,6 +181,77 @@ ALTER SEQUENCE public.subdivision_subd_id_seq OWNED BY public.subdivision.subd_i
 
 
 --
+-- Name: userr; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.userr (
+    userr_id integer NOT NULL,
+    userr_name character varying(50) NOT NULL,
+    userr_login character varying(100) NOT NULL,
+    userr_password character varying(100)
+);
+
+
+ALTER TABLE public.userr OWNER TO postgres;
+
+--
+-- Name: userr_userr_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.userr_userr_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.userr_userr_id_seq OWNER TO postgres;
+
+--
+-- Name: userr_userr_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.userr_userr_id_seq OWNED BY public.userr.userr_id;
+
+
+--
+-- Name: usser; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usser (
+    id integer NOT NULL,
+    login character varying(100) NOT NULL,
+    password character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.usser OWNER TO postgres;
+
+--
+-- Name: usser_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.usser_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.usser_id_seq OWNER TO postgres;
+
+--
+-- Name: usser_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.usser_id_seq OWNED BY public.usser.id;
+
+
+--
 -- Name: company comp_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -209,6 +280,20 @@ ALTER TABLE ONLY public.subdivision ALTER COLUMN subd_id SET DEFAULT nextval('pu
 
 
 --
+-- Name: userr userr_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.userr ALTER COLUMN userr_id SET DEFAULT nextval('public.userr_userr_id_seq'::regclass);
+
+
+--
+-- Name: usser id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usser ALTER COLUMN id SET DEFAULT nextval('public.usser_id_seq'::regclass);
+
+
+--
 -- Data for Name: company; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -231,6 +316,7 @@ COPY public.document (doc_id, doc_name, doc_date, doc_action, doc_date_action, s
 3	приказ	2023-01-22	закрепить	2023-01-23	1	2
 4	приказ	2023-01-22	закрепить	2023-01-23	1	3
 6	jhj	2023-04-27	hjjjjj	2023-04-27	3	6
+7	вввввв	2022-04-26	ввввввввввв	2022-03-04	1	2
 \.
 
 
@@ -245,6 +331,8 @@ COPY public.fixed_placement (doc_id, place_id) FROM stdin;
 4	2
 6	3
 6	2
+7	2
+7	3
 \.
 
 
@@ -272,6 +360,27 @@ COPY public.subdivision (subd_id, subd_full_name, subd_short_name, genitive, dat
 6	Производственное	ПП	Производственному	Производственному	3	6
 4	Исследовательско-техническое	ИТ	Исследовательско-технического	Исследовательско-техническому	2	4
 1	Финансово-учетное	ФУ	Финансово-учетного	Финансово-учетному	1	1
+7	Новый отдел	НО	Нового отдела	Новому отделу	3	6
+8	САМ	С	САМА	САМУ	5	8
+\.
+
+
+--
+-- Data for Name: userr; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.userr (userr_id, userr_name, userr_login, userr_password) FROM stdin;
+1	Максим	Maxim01	1234
+\.
+
+
+--
+-- Data for Name: usser; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.usser (id, login, password) FROM stdin;
+1	Менеджер	123
+2	Продавец	12345
 \.
 
 
@@ -301,6 +410,20 @@ SELECT pg_catalog.setval('public.placement_place_id_seq', 1, false);
 --
 
 SELECT pg_catalog.setval('public.subdivision_subd_id_seq', 1, false);
+
+
+--
+-- Name: userr_userr_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.userr_userr_id_seq', 1, false);
+
+
+--
+-- Name: usser_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.usser_id_seq', 1, false);
 
 
 --
@@ -341,6 +464,30 @@ ALTER TABLE ONLY public.placement
 
 ALTER TABLE ONLY public.subdivision
     ADD CONSTRAINT subdivision_pkey PRIMARY KEY (subd_id);
+
+
+--
+-- Name: userr userr_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.userr
+    ADD CONSTRAINT userr_pkey PRIMARY KEY (userr_id);
+
+
+--
+-- Name: usser usser_login_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usser
+    ADD CONSTRAINT usser_login_key UNIQUE (login);
+
+
+--
+-- Name: usser usser_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usser
+    ADD CONSTRAINT usser_pkey PRIMARY KEY (id);
 
 
 --

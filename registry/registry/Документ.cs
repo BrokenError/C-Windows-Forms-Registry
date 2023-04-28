@@ -31,17 +31,14 @@ namespace registry
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-
-
             string kod1 = null, kod2 = null;
 
             for (int i = 0; i < Form1.ds.Tables["Подразделения выбор"].Rows.Count; i++)
             {
-                if (Form1.ds.Tables["Подразделения выбор"].Rows[i]["Название подразделения"].ToString() == comboBox1.Text)
+                if (Form1.ds.Tables["Подразделения выбор"].Rows[i]["Арендодатель"].ToString() == comboBox1.Text)
                     kod1 = Form1.ds.Tables["Подразделения выбор"].Rows[i]["Код"].ToString();
 
-                if (Form1.ds.Tables["Подразделения выбор"].Rows[i]["Название подразделения"].ToString() == comboBox2.Text)
+                if (Form1.ds.Tables["Подразделения выбор"].Rows[i]["Арендатор"].ToString() == comboBox2.Text)
                     kod2 = Form1.ds.Tables["Подразделения выбор"].Rows[i]["Код"].ToString();
             }
             string sql = "update document set doc_date_action='" + dateTimePicker2.Value + "', doc_date='" + dateTimePicker1.Value + "'," +
@@ -49,7 +46,7 @@ namespace registry
             if (!Form1.Modification_Execute(sql))
                 return;
             Form1.ds.Tables["Журнал документов"].Rows[Журнал_Документ.n].ItemArray = new object[]
-            { textBox1.Text, textBox2.Text,dateTimePicker1.Value, textBox4.Text, dateTimePicker2.Value, comboBox1.Text, comboBox2.Text};
+            { textBox1.Text, textBox2.Text, dateTimePicker1.Value, textBox4.Text, dateTimePicker2.Value, comboBox1.Text, comboBox2.Text};
 
             sql = "delete from document where doc_id=" + textBox1.Text;
             Form1.Modification_Execute(sql);
@@ -57,6 +54,7 @@ namespace registry
             sql = "insert into document values (" + textBox1.Text + ", '" + textBox2.Text + "', '" + dateTimePicker1.Value + "', '" + textBox4.Text
              + "', '" + dateTimePicker2.Value + "', " + kod1 + ", " + kod2 + ");";
             Console.WriteLine(sql);
+        
             Form1.Modification_Execute(sql);
 
             for (int j = 0; j < Form1.ds.Tables["Помещения"].Rows.Count; j++)
