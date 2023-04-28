@@ -102,20 +102,20 @@ namespace registry
                 Console.WriteLine(sq);
                 Close();
             }
+            else if (textBox1.Text != textBox2.Text)
+            {
+                MessageBox.Show("Неверное подтверждение пароля", "Внимание");
+            }
             else if (valid_login == false)
             {
                 MessageBox.Show("Учётной записи не существует", "Внимание");
             }
-            else if (valid_login == true)
+            else
             {
                 sq = "update " + name_table + " set is_activate =" + activate + " where " + name_login + "='" + comboBox1.Text + "';";
                 Console.WriteLine(sq);
                 Form1.Modification_Execute(sq);
                 Close();
-            }
-            else
-            {
-                MessageBox.Show("Неверное подтверждение пароля", "Внимание");
             }
         }
     }

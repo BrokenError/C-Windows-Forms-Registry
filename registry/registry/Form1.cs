@@ -53,7 +53,7 @@ namespace registry
 
         private void пToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Help.ShowHelp(this, "C:/Users/UnicorN/Desktop/chmm/MyProject.chm");
         }
 
         private void предприятиеToolStripMenuItem_Click(object sender, EventArgs e)

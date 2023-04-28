@@ -36,7 +36,6 @@ namespace registry
 
             for (int i = 0; i < Form1.ds.Tables["Добавленные"].Rows.Count; i++)
             {
-                activate = false;
                 comboBox1.Items.Add(Form1.ds.Tables["Добавленные"].Rows[i]["userr_login"]);
             }
 
@@ -57,12 +56,14 @@ namespace registry
             {
                 if (comboBox1.Text == Form1.ds.Tables["Добавленные"].Rows[i]["userr_login"].ToString())
                 {
+                    activate = false;
                     name = "Добавленные";
                     kod = Form1.ds.Tables["Добавленные"].Rows[i]["password"].ToString();
                     is_activate = Form1.ds.Tables["Добавленные"].Rows[i]["is_activate"].ToString();
                 }
                 else if (comboBox1.Text == Form1.ds.Tables["Пользователь"].Rows[i]["login"].ToString())
                 {
+                    activate = true;
                     name = "Пользователь";
                     kod = Form1.ds.Tables["Пользователь"].Rows[i]["password"].ToString();
                 }
@@ -83,16 +84,20 @@ namespace registry
             }
             else if (activate == false)
             {
-                if (is_activate.ToLower() == "true")
+                if (is_activate.ToLower() == "true" && textBox1.Text == kod.ToString())
                 {
                     Hide();
                     Form1 form = new Form1(); form.ShowDialog();
                     Close();
                 }
-                else
+                else if (is_activate.ToLower() == "false") 
                 {
                     MessageBox.Show("Доступ запрещен! Аккаунт не подтверждён");
                 }
+                else
+                {
+                    MessageBox.Show("Неправильный пароль");
+                } 
             }
             else
             {
