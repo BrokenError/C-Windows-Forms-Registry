@@ -61,7 +61,11 @@ namespace registry
                     kod = Form1.ds.Tables["Добавленные"].Rows[i]["password"].ToString();
                     is_activate = Form1.ds.Tables["Добавленные"].Rows[i]["is_activate"].ToString();
                 }
-                else if (comboBox1.Text == Form1.ds.Tables["Пользователь"].Rows[i]["login"].ToString())
+
+            }
+            for (int i = 0; i < Form1.ds.Tables["Пользователь"].Rows.Count; i++)
+            {
+                if (comboBox1.Text == Form1.ds.Tables["Пользователь"].Rows[i]["login"].ToString())
                 {
                     activate = true;
                     name = "Пользователь";
@@ -74,6 +78,8 @@ namespace registry
             {
                 if (comboBox1.Text == "Менеджер")
                     polzov = "Администратор";
+                else if (comboBox1.Text == "Продавец")
+                    polzov = "Продавец";
                 Hide();
                 Form1 form = new Form1(); form.ShowDialog();
                 Close();

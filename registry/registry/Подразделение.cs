@@ -44,14 +44,16 @@ namespace registry
 
         private void Подразделение_Load(object sender, EventArgs e)
         {
-            if (Авторизация.polzov != "Администратор")
+            if (Авторизация.polzov != "Администратор" && Авторизация.polzov != "Продавец")
             {
                 button5.Enabled = false;
                 button6.Enabled = false;
             }
 
 
-            string sql = "SELECT subd_id as \"Код\", subd_full_name as \"Полное название\", subd_short_name as \"Краткое название\", genitive as \"Родительный падеж\", dative as \"Дательный падеж\", comp_id as \"Код предприятия\", subd_main as \"Код главного подразделения\"" + " from subdivision order by subd_id";
+            string sql = "SELECT subd_id as \"Код\", subd_full_name as \"Полное название\", subd_short_name as \"Краткое название\", genitive as" +
+                " \"Родительный падеж\", dative as \"Дательный падеж\", comp_id as \"Код предприятия\", subd_main as \"Код главного подразделения\""
+                + " from subdivision order by subd_id";
             Form1.Table_Fill("Подразделение", sql);
 
             string company = "Select comp_id as \"Код компании\",  comp_name as \"Название компании\" from company order by comp_id";
@@ -98,7 +100,8 @@ namespace registry
                 }
             }
 
-            string ps = "select subd_id as \"Код\", subd_full_name as \"Полное название\", subd_main as \"Код главного подразделения\" from subdivision join company on subdivision.comp_id = company.comp_id where company.comp_id=" + kod;
+            string ps = "select subd_id as \"Код\", subd_full_name as \"Полное название\", subd_main as" +
+                " \"Код главного подразделения\" from subdivision join company on subdivision.comp_id = company.comp_id where company.comp_id=" + kod;
             Form1.Table_Fill("Доступные главные подразделения", ps);
             comboBox2.Items.Clear();
             Console.WriteLine("yep");
@@ -194,7 +197,8 @@ namespace registry
             string sql;
             if (n == Form1.ds.Tables["Подразделение"].Rows.Count)
             {
-                sql = "insert into subdivision values ( " + textBox1.Text + ",'" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + textBox5.Text + "','" + kod + "','" + kod2 + "')";
+                sql = "insert into subdivision values ( " + textBox1.Text + ",'" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','"
+                    + textBox5.Text + "','" + kod + "','" + kod2 + "')";
                 if (!Form1.Modification_Execute(sql))
                     return;
                 textBox1.Enabled = false;
@@ -202,7 +206,8 @@ namespace registry
             }
             else
             {
-                sql = "Update subdivision set subd_full_name='" + textBox2.Text + "', subd_short_name='" + textBox3.Text + "', genitive='"+ textBox4.Text + "', dative='"+ textBox5.Text + "', comp_id='" + kod + "', subd_main='" + kod2 + "' where subd_id=" + textBox1.Text;
+                sql = "Update subdivision set subd_full_name='" + textBox2.Text + "', subd_short_name='" + textBox3.Text + "', genitive='"+ textBox4.Text + "'," +
+                    " dative='"+ textBox5.Text + "', comp_id='" + kod + "', subd_main='" + kod2 + "' where subd_id=" + textBox1.Text;
                 if (!Form1.Modification_Execute(sql))
                     return;
                 Form1.ds.Tables["Подразделение"].Rows[n].ItemArray = new object[] { textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, kod, kod2};

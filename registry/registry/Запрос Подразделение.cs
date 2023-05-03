@@ -22,10 +22,10 @@ namespace registry
         {
             if (comboBox2.Text == "")
             {
-                sql = "select extract(YEAR from d.doc_date) as \"Год\", s.subd_full_name as \"Название_предприятия\", count(distinct fp.place_id) " +
+                sql = "select extract(YEAR from d.doc_date) as \"Год\", s.subd_full_name as \"Название_предприятия\", d.doc_date_action as \"Дата_действия\", count(distinct fp.place_id) " +
                     "as \"Количество\", sum(placement.place_area) as \"Сумма площадей\" from document d join fixed_placement fp on d.doc_id = fp.doc_id" +
                     " join placement on placement.place_id = fp.place_id join subdivision s on d.subd_id1 = s.subd_id join company on company.comp_id = s.comp_id" +
-                    " where d.doc_date between '" + dateTimePicker1.Value + "' and '" + dateTimePicker2.Value + "' group by Год, Название_предприятия order by Год;";
+                    " where d.doc_date between '" + dateTimePicker1.Value + "' and '" + dateTimePicker2.Value + "' group by Год, Дата_действия, Название_предприятия order by Год;";
             }
             else
             {
@@ -37,10 +37,10 @@ namespace registry
                     }
                 }
 
-                sql = "select extract (YEAR from d.doc_date) as \"Год\", s.subd_full_name as \"Название_предприятия\", count(distinct fp.place_id) as \"Количество\"," +
-                    " sum(placement.place_area) as \"Количество\" from document d join fixed_placement fp on d.doc_id=fp.doc_id join" +
+                sql = "select extract (YEAR from d.doc_date) as \"Год\", s.subd_full_name as \"Название_предприятия\", d.doc_date_action as \"Дата_действия\", count(distinct fp.place_id) as \"Количество помещений\"," +
+                    " sum(placement.place_area) as \"Суммарная площадь\" from document d join fixed_placement fp on d.doc_id=fp.doc_id join" +
                     " placement on placement.place_id = fp.place_id join subdivision s on d.subd_id1 = s.subd_id" +
-                    " where s.subd_id =" + kod + " and d.doc_date between '" + dateTimePicker1.Value + "' and '" + dateTimePicker2.Value + "' group by Год, Название_предприятия order by Год;";
+                    " where s.subd_id =" + kod + " and d.doc_date between '" + dateTimePicker1.Value + "' and '" + dateTimePicker2.Value + "' group by Год, Дата_действия, Название_предприятия order by Год;";
             }
             Form1.Table_Fill("Динамика площадей", sql);
 

@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.3
--- Dumped by pg_dump version 14.3
+-- Dumped from database version 15.2
+-- Dumped by pg_dump version 15.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -188,7 +188,8 @@ CREATE TABLE public.userr (
     userr_id integer NOT NULL,
     userr_name character varying(50) NOT NULL,
     userr_login character varying(100) NOT NULL,
-    userr_password character varying(100)
+    password character varying(100) NOT NULL,
+    is_activate boolean DEFAULT false
 );
 
 
@@ -369,8 +370,9 @@ COPY public.subdivision (subd_id, subd_full_name, subd_short_name, genitive, dat
 -- Data for Name: userr; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.userr (userr_id, userr_name, userr_login, userr_password) FROM stdin;
-1	Максим	Maxim01	1234
+COPY public.userr (userr_id, userr_name, userr_login, password, is_activate) FROM stdin;
+1	Максим	Maxim01	123	t
+2	fgff	fff	1	f
 \.
 
 
@@ -380,7 +382,7 @@ COPY public.userr (userr_id, userr_name, userr_login, userr_password) FROM stdin
 
 COPY public.usser (id, login, password) FROM stdin;
 1	Менеджер	123
-2	Продавец	12345
+2	Продавец	123456
 \.
 
 
@@ -416,7 +418,7 @@ SELECT pg_catalog.setval('public.subdivision_subd_id_seq', 1, false);
 -- Name: userr_userr_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.userr_userr_id_seq', 1, false);
+SELECT pg_catalog.setval('public.userr_userr_id_seq', 1, true);
 
 
 --

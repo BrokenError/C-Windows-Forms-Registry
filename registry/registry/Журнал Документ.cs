@@ -94,10 +94,10 @@ namespace registry
         {
             n = dataGridView1.CurrentRow.Index;
 
-            sql = "select document.doc_id as \"Номер документа\", placement.place_id as \"Код помещения\", place_type as \"Тип\", place_area as \"Площадь\" from document inner join fixed_placement" +
+            sql = "select document.doc_id as \"Номер документа\", placement.place_id as \"Код помещения\", place_type as \"Тип\", place_area as \"Площадь\"" +
+                " from document inner join fixed_placement" +
                 " on document.doc_id = fixed_placement.doc_id inner join placement on fixed_placement.place_id=placement.place_id" +
                 " where document.doc_id = " + dataGridView1.Rows[n].Cells["Номер"].Value;
-            Console.WriteLine("отработал");
             Form1.Table_Fill("Помещения", sql);
         }
 

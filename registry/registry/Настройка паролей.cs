@@ -66,7 +66,11 @@ namespace registry
                     name_login = "userr_login";
                     name_table = "userr";
                 }
-                else if (comboBox1.Text == Form1.ds.Tables["Пользователь"].Rows[i]["login"].ToString())
+
+            }
+            for (int i = 0; i < Form1.ds.Tables["Пользователь"].Rows.Count; i++)
+            {
+                    if (comboBox1.Text == Form1.ds.Tables["Пользователь"].Rows[i]["login"].ToString())
                 {
                     panel1.Hide();
                     valid_login = true;
@@ -78,6 +82,16 @@ namespace registry
 
         private void Настройка_паролей_Activated(object sender, EventArgs e)
         {
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox1.UseSystemPasswordChar = false;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox2.UseSystemPasswordChar = false;
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)

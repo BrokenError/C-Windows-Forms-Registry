@@ -22,7 +22,7 @@ namespace registry
 
         private void Помещение_Load(object sender, EventArgs e)
         {
-            if (Авторизация.polzov != "Администратор")
+            if (Авторизация.polzov != "Администратор" && Авторизация.polzov != "Продавец")
             {
                 button5.Enabled = false;
                 button6.Enabled = false;

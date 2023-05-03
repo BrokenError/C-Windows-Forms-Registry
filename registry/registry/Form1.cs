@@ -126,7 +126,12 @@ namespace registry
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (Авторизация.polzov != "Администратор")
+            if (Авторизация.polzov == "Продавец")
+            {
+                журналыToolStripMenuItem.Enabled = true;
+                настройкаПаролейToolStripMenuItem.Enabled = false;
+            }
+            else if (Авторизация.polzov != "Администратор")
             {
                 журналыToolStripMenuItem.Enabled = false;
                 настройкаПаролейToolStripMenuItem.Enabled = false;
